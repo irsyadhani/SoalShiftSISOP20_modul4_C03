@@ -5,10 +5,10 @@ Kelompok C03:
 
 ----------------------------------------------------------------
 ## Soal
-* [Soal 1](#Soal-1-(Enkripsi-Versi-1))
-* [Soal 2](#Soal-2-(Enkripsi-Versi-2))
-* [Soal 3](#Soal-3-(Sinkronisasi-Direktori-Otomatis))
-* [Soal 4](#Soal-4-(Log-System))
+* [Soal 1](#soal-1-enkripsi-versi-1)
+* [Soal 2](#soal-1-enkripsi-versi-2)
+* [Soal 3](#soal-3-sinkronisasi-direktori-otomatis)
+* [Soal 4](#oal-4-log-system)
 ----------------------------------------------------------------
 # Soal 1 (Enkripsi Versi 1)
    _**Soal:**_
