@@ -8,7 +8,7 @@ Kelompok C03:
 * [Soal 1](#soal-1-enkripsi-versi-1)
 * [Soal 2](#soal-1-enkripsi-versi-2)
 * [Soal 3](#soal-3-sinkronisasi-direktori-otomatis)
-* [Soal 4](#oal-4-log-system)
+* [Soal 4](#soal-4-log-system)
 ----------------------------------------------------------------
 # Soal 1 (Enkripsi Versi 1)
    _**Soal:**_
