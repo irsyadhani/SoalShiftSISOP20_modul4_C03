@@ -13,7 +13,17 @@ Kelompok C03:
 # Soal 1 (Enkripsi Versi 1)
    _**Soal:**_
    1. Enkripsi Versi 1
-   > Source Code: [Soal 1](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/soal1.c)
+a. Jika sebuah direktori dibuat dengan awalan “encv1_”, maka direktori tersebut
+akan menjadi direktori terenkripsi menggunakan metode enkripsi v1.
+b. Jika sebuah direktori di-rename dengan awalan “encv1_”, maka direktori tersebut
+akan menjadi direktori terenkripsi menggunakan metode enkripsi v1.
+c. Apabila sebuah direktori terenkripsi di-rename menjadi tidak terenkripsi, maka isi
+adirektori tersebut akan terdekrip.
+d. Setiap pembuatan direktori terenkripsi baru (mkdir ataupun rename) akan
+tercatat ke sebuah database/log berupa file.
+e. Semua file yang berada dalam direktori ter enkripsi menggunakan caesar cipher
+dengan key.
+   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
 
 #
 
@@ -25,7 +35,7 @@ _**Kendala:**_
 # Soal 2 (Enkripsi Versi 2)
    _**Soal:**_
    2. Enkripsi Versi 2
-   > Source Code: [Soal 2](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/soal2.c)
+   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
 
 #
 
@@ -37,17 +47,8 @@ _**Kendala:**_
 # Soal 3 (Sinkronisasi Direktori Otomatis)
    _**Soal:**_
    3. Tanpa mengurangi keumuman, misalkan suatu directory bernama dir akan tersinkronisasi dengan directory yang memiliki nama yang sama dengan awalan sync_ yaitu sync_dir. Persyaratan untuk sinkronisasi yaitu:
-a.	Kedua directory memiliki parent directory yang sama.
-b.	Kedua directory kosong atau memiliki isi yang sama. Dua directory dapat dikatakan memiliki isi yang sama jika memenuhi:
-i.	Nama dari setiap berkas di dalamnya sama.
-ii.	Modified time dari setiap berkas di dalamnya tidak berselisih lebih dari 0.1 detik.
-c.	Sinkronisasi dilakukan ke seluruh isi dari kedua directory tersebut, tidak hanya di satu child directory saja.
-d.	Sinkronisasi mencakup pembuatan berkas/directory, penghapusan berkas/directory, dan pengubahan berkas/directory.
 
-Jika persyaratan di atas terlanggar, maka kedua directory tersebut tidak akan tersinkronisasi lagi.
-Implementasi dilarang menggunakan symbolic links dan thread.
-
-   > Source Code: [Soal 3](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/soal3.c)
+   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
 
 #
 
@@ -63,14 +64,57 @@ Belum tahu cara menyinkronisasi direktori
 b.	Agar nantinya pencatatan lebih rapi dan terstruktur, log akan dibagi menjadi beberapa level yaitu INFO dan WARNING.
 c.	Untuk log level WARNING, merupakan pencatatan log untuk syscall rmdir dan unlink.
 d.	Sisanya, akan dicatat dengan level INFO.
-e.	Format untuk logging yaitu: [LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]
+e.	Format untuk logging yaitu: ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```
 
-   > Source Code: [Soal 4](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/soal4.c)
+   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
 
 #
 
 _**Penyelesaian:**_
+* Soal nomor 4 meminta untuk membuat log yang fungsinya untuk melakukan pencatatan, format pada file system-nya adalah ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```. Terdapat 2 parameter log yaitu : ```WARNING``` untuk mencatat setiap systemcall rmdir serta unlink dan ```INFO``` untuk selain itu.
+* Contoh dari isi dari log tersebut, yaitu:
+```
+INFO::200501-00:26:12::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
+INFO::200501-00:26:12::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
+WARNING::200501-00:26:13::REMOVE::/home/irsyad/Documents/jawabansoal3b (copy).png
+INFO::200501-00:26:13::LS::/home/irsyad/Documents
+INFO::200501-00:26:13::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
+INFO::200501-00:26:15::LS::/home/irsyad/Documents
+```
+* Menaruh log ```INFO``` di fungsi ```MKDIR``` dan lainnya
+```c
+char desc[100];
+  sprintf(desc, "MKDIR::%s", fpath);
+  writeLog("INFO", desc);
+```
+Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi
+* fungsi write log
+```c
+char *log_path = "/home/irsyad/fs.log";
+```
+fungsi ```log_path``` tersebut untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```
+```c
+void writeLog(char *level, char *cmd_desc)
+{
+  FILE * fp;
+  fp = fopen (log_path, "a+");
 
+  time_t rawtime = time(NULL);
+  
+  struct tm *info = localtime(&rawtime);
+  
+  char time[100];
+  strftime(time, 100, "%y%m%d-%H:%M:%S", info);
+
+  char log[100];
+  sprintf(log, "%s::%s::%s\n", level, time, cmd_desc);
+  fputs(log, fp);
+
+  fclose(fp);
+}
+```
+Pada fungsi ```writeLog``` diatas menerima 2 parameter, yaitu level berisi string level log ```WARNING``` dan ```INFO``` serta ```cmd_desc``` yang berisik syscall dan nama path file. Pertama kita deklarasikan variabel ```*fp``` bertipe file, fp berisi fungsi ```fopen``` yang berfungsi menerima 2 parameter. Parameter pertama ialah ```log_path```  yag berisi path file dari ```fs.log``` yang akan dibuat. Parameter kedua berisi option file ```a+``` untuk ditujukan di parameter pertama. Yang dimaksudkan untuk membuka file untuk membaca dan menambahkan isi ke dalam file (menambahkan tulisan di akhir file), file dibuat jika belum ada. Fungsi ```writeLog``` akan dipanggil dalam semua fungsi fuse (kecuali getattr dan readdir). 
+Hasil eksekusi program:
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal4/soal4.png "Hasil Soal 4")
 #
 _**Kendala:**_
-Masih bingung untuk membuat log
