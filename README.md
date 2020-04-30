@@ -82,17 +82,18 @@ INFO::200501-00:26:13::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
 INFO::200501-00:26:15::LS::/home/irsyad/Documents
 ```
 * Menaruh log ```INFO``` di fungsi ```MKDIR``` dan lainnya
+Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi
 ```c
 char desc[100];
   sprintf(desc, "MKDIR::%s", fpath);
   writeLog("INFO", desc);
 ```
-Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi
 * fungsi write log
+fungsi ```log_path``` tersebut untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```
 ```c
 char *log_path = "/home/irsyad/fs.log";
 ```
-fungsi ```log_path``` tersebut untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```
+Pada fungsi ```writeLog``` diatas menerima 2 parameter, yaitu level berisi string level log ```WARNING``` dan ```INFO``` serta ```cmd_desc``` yang berisik syscall dan nama path file. Pertama kita deklarasikan variabel ```*fp``` bertipe file, fp berisi fungsi ```fopen``` yang berfungsi menerima 2 parameter. Parameter pertama ialah ```log_path```  yag berisi path file dari ```fs.log``` yang akan dibuat. Parameter kedua berisi option file ```a+``` untuk ditujukan di parameter pertama. Yang dimaksudkan untuk membuka file untuk membaca dan menambahkan isi ke dalam file (menambahkan tulisan di akhir file), file dibuat jika belum ada. Fungsi ```writeLog``` akan dipanggil dalam semua fungsi fuse (kecuali getattr dan readdir). 
 ```c
 void writeLog(char *level, char *cmd_desc)
 {
@@ -113,7 +114,6 @@ void writeLog(char *level, char *cmd_desc)
   fclose(fp);
 }
 ```
-Pada fungsi ```writeLog``` diatas menerima 2 parameter, yaitu level berisi string level log ```WARNING``` dan ```INFO``` serta ```cmd_desc``` yang berisik syscall dan nama path file. Pertama kita deklarasikan variabel ```*fp``` bertipe file, fp berisi fungsi ```fopen``` yang berfungsi menerima 2 parameter. Parameter pertama ialah ```log_path```  yag berisi path file dari ```fs.log``` yang akan dibuat. Parameter kedua berisi option file ```a+``` untuk ditujukan di parameter pertama. Yang dimaksudkan untuk membuka file untuk membaca dan menambahkan isi ke dalam file (menambahkan tulisan di akhir file), file dibuat jika belum ada. Fungsi ```writeLog``` akan dipanggil dalam semua fungsi fuse (kecuali getattr dan readdir). 
 Hasil eksekusi program:
 ![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal4/soal4.png "Hasil Soal 4")
 #
