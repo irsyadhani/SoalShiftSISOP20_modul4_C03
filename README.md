@@ -81,15 +81,14 @@ INFO::200501-00:26:13::LS::/home/irsyad/Documents
 INFO::200501-00:26:13::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
 INFO::200501-00:26:15::LS::/home/irsyad/Documents
 ```
-* Menaruh log ```INFO``` di fungsi ```MKDIR``` dan lainnya*
-Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi
+Menaruh log ```INFO``` di fungsi ```MKDIR``` dan lainnya
+Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi.
 ```c
 char desc[100];
   sprintf(desc, "MKDIR::%s", fpath);
   writeLog("INFO", desc);
 ```
-* Fungsi write log*
-fungsi ```log_path``` tersebut untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```
+Fungsi ```log_path``` berfungsi untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```.
 ```c
 char *log_path = "/home/irsyad/fs.log";
 ```
