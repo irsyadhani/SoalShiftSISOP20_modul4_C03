@@ -71,8 +71,8 @@ e.	Format untuk logging yaitu: ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[
 #
 
 _**Penyelesaian:**_
-* Soal nomor 4 meminta untuk membuat log yang fungsinya untuk melakukan pencatatan, format pada file system-nya adalah ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```. Terdapat 2 parameter log yaitu : ```WARNING``` untuk mencatat setiap systemcall rmdir serta unlink dan ```INFO``` untuk selain itu.
-* Contoh dari isi dari log tersebut, yaitu:
+Soal nomor 4 meminta untuk membuat log yang fungsinya untuk melakukan pencatatan, format pada file system-nya adalah ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```. Terdapat 2 parameter log yaitu : ```WARNING``` untuk mencatat setiap systemcall rmdir serta unlink dan ```INFO``` untuk selain itu.
+* Contoh isi dari log tersebut, yaitu:
 ```
 INFO::200501-00:26:12::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
 INFO::200501-00:26:12::LS::/home/irsyad/Documents/jawabansoal3b (copy).png
