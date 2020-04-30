@@ -60,16 +60,14 @@ Belum tahu cara menyinkronisasi direktori
 #
 # Soal 4 (Log System)
    _**Soal:**_
-4. a.	Sebuah berkas nantinya akan terbentuk bernama "fs.log" di direktori *home* pengguna (/home/[user]/fs.log) yang berguna menyimpan daftar perintah system call yang telah dijalankan.
-b.	Agar nantinya pencatatan lebih rapi dan terstruktur, log akan dibagi menjadi beberapa level yaitu INFO dan WARNING.
-c.	Untuk log level WARNING, merupakan pencatatan log untuk syscall rmdir dan unlink.
-d.	Sisanya, akan dicatat dengan level INFO.
-e.	Format untuk logging yaitu: ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```
-
-   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
-
+* a.	Sebuah berkas nantinya akan terbentuk bernama "fs.log" di direktori *home* pengguna (/home/[user]/fs.log) yang berguna menyimpan daftar perintah system call yang telah dijalankan.
+* b.	Agar nantinya pencatatan lebih rapi dan terstruktur, log akan dibagi menjadi beberapa level yaitu INFO dan WARNING.
+* c.	Untuk log level WARNING, merupakan pencatatan log untuk syscall rmdir dan unlink.
+* d.	Sisanya, akan dicatat dengan level INFO.
+* e.	Format untuk logging yaitu: ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```
 #
-
+   > Source Code: [ssfs.c](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/ssfs.c)
+#
 _**Penyelesaian:**_
 Soal nomor 4 meminta untuk membuat log yang fungsinya untuk melakukan pencatatan, format pada file system-nya adalah ```[LEVEL]::[yy][mm][dd]-[HH]:[MM]:[SS]::[CMD]::[DESC ...]```. Terdapat 2 parameter log yaitu : ```WARNING``` untuk mencatat setiap systemcall rmdir serta unlink dan ```INFO``` untuk selain itu.
 * Contoh isi dari log tersebut, yaitu:
