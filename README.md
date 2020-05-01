@@ -152,7 +152,16 @@ Fungsi implemetasi pada fuse:
 .write    = menulis ke file
 ```
 Hasil eksekusi program:
-![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1.png "Hasil Soal 1")
+Pertama, folder path ```/home/irsyad/Document``` masih belum di-mount.
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1_1.png "Hasil Soal 1_1")
+Kedua, folder path ```/home/irsyad/Document``` masih sudah di-mount.
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1_2.png "Hasil Soal 1_2")
+Ketiga, file terenkrip di folder ```encv1_satu```.
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1_3.png "Hasil Soal 1_3")
+Keempat, rename nama folder biasa tanpa ```encv1_```.
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1_4.png "Hasil Soal 1_4")
+Kelima, file di dalam folder ```satu``` terdekrip.
+![alt text](https://github.com/irsyadhani22/SoalShiftSISOP20_modul4_C03/blob/master/gambar/soal1/soal1_5.png "Hasil Soal 1_5")
 # Soal 2 (Enkripsi Versi 2)
    _**Soal:**_
 Enkripsi Versi 2
