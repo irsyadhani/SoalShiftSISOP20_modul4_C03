@@ -59,7 +59,7 @@ _**Kendala:**_
 Belum tahu cara menyinkronisasi direktori
 #
 # Soal 4 (Log System)
-   _**Soal:**_
+ _**Soal:**_
 * a.	Sebuah berkas nantinya akan terbentuk bernama "fs.log" di direktori *home* pengguna (/home/[user]/fs.log) yang berguna menyimpan daftar perintah system call yang telah dijalankan.
 * b.	Agar nantinya pencatatan lebih rapi dan terstruktur, log akan dibagi menjadi beberapa level yaitu INFO dan WARNING.
 * c.	Untuk log level WARNING, merupakan pencatatan log untuk syscall rmdir dan unlink.
@@ -82,25 +82,25 @@ INFO::200501-00:26:15::LS::/home/irsyad/Documents
 Menaruh log ```INFO``` di fungsi ```MKDIR``` dan lainnya
 Pada fungsi ```MKDIR``` diatas mendeklarasikan array ```desc```, di bagian ```sprintf``` melakukan penggabungan dimana fpath yang berformat ```%s``` (berisi nama file) digabung dengan ```WRITE```, hasil dari penggabungan tersebut akan disimpan di variabel ```desc```. Kemudian memanggil fungsi ```writeLog``` untuk mempassing log pada parameter yang berupa ```INFO``` serta parameter kedua yaitu hasil concate format ```WRITE``` dan nama path file yang disimpan di dalam array desc. Fungsi ```MKDIR``` tersebut tercatat pada file yang bernama ```fs.log``` jika kita membaca isi.
 ```c
-char desc[100];
-  sprintf(desc, "MKDIR::%s", fpath);
+  char desc[128];
+  sprintf(desc, "READ::%s", fpath);
   writeLog("INFO", desc);
 ```
 Fungsi ```log_path``` berfungsi untuk menyimpan nama path file yang akan digunakan untuk membuat file ```fs.log```.
 ```c
-char *log_path = "/home/irsyad/fs.log";
+static const char *logpath = "/home/irsyad/fs.log";
 ```
 Pada fungsi ```writeLog``` diatas menerima 2 parameter, yaitu level berisi string level log ```WARNING``` dan ```INFO``` serta ```cmd_desc``` yang berisik syscall dan nama path file. Pertama kita deklarasikan variabel ```*fp``` bertipe file, fp berisi fungsi ```fopen``` yang berfungsi menerima 2 parameter. Parameter pertama ialah ```log_path```  yag berisi path file dari ```fs.log``` yang akan dibuat. Parameter kedua berisi option file ```a+``` untuk ditujukan di parameter pertama. Yang dimaksudkan untuk membuka file untuk membaca dan menambahkan isi ke dalam file (menambahkan tulisan di akhir file), file dibuat jika belum ada. Fungsi ```writeLog``` akan dipanggil dalam semua fungsi fuse (kecuali getattr dan readdir). 
 ```c
 void writeLog(char *level, char *cmd_desc)
 {
   FILE * fp;
-  fp = fopen (log_path, "a+");
+  fp = fopen (logpath, "a+");
 
   time_t rawtime = time(NULL);
-  
+
   struct tm *info = localtime(&rawtime);
-  
+
   char time[100];
   strftime(time, 100, "%y%m%d-%H:%M:%S", info);
 
